@@ -1,4 +1,5 @@
 "Strict";
+
 let days;
 
 switch (new Date().getDay()) {
@@ -647,3 +648,213 @@ class Alien {
 }
 const alien1 = new Alien("Ali", "I'm Ali the alien!");
 console.log(alien1.name);
+
+//Exception Handling
+const numerator = 10;
+const denominator = "x";
+try {
+  console.log(numerator / denominator);
+  console.log(x);
+} catch (error) {
+  console.log("An error caught");
+  console.log("Error message: " + error);
+} finally {
+  console.log("Finally will execute every time");
+}
+
+//Sort array by object property
+let employees = [
+  {
+    firstName: "John",
+    lastName: "Doe",
+    age: 27,
+    joinedDate: "December 15, 2017",
+  },
+
+  {
+    firstName: "Ana",
+    lastName: "Rosy",
+    age: 25,
+    joinedDate: "January 15, 2019",
+  },
+
+  {
+    firstName: "Zion",
+    lastName: "Albert",
+    age: 30,
+    joinedDate: "February 15, 2011",
+  },
+];
+employees.sort((a, b) => {
+  return a.age - b.age;
+});
+
+employees.forEach((e) => {
+  console.log(`${e.firstName} ${e.lastName} ${e.age}`);
+});
+
+function* iterate(a, b) {
+  for (let i = a; i <= b; ++i) yield i;
+}
+
+function range(a, b) {
+  if (typeof a === "string") {
+    let res = [...iterate(a.charCodeAt(), b.charCodeAt())].map((n) =>
+      String.fromCharCode(n)
+    );
+    console.log(res);
+  } else {
+    let result = [...iterate(a, b)];
+    console.log(result);
+  }
+}
+range(1, 10);
+range("A", "E");
+
+//Stack
+class Stack {
+  constructor() {
+    this.items = [];
+  }
+  add(s) {
+    return this.items.push(s);
+  }
+  remove() {
+    if (this.items.length > 0) return this.items.pop();
+  }
+  peek() {
+    return this.items[this.items.length - 1];
+  }
+  isEmpty() {
+    return this.items.length === 0;
+  }
+  size() {
+    return this.items.length;
+  }
+  clear() {
+    this.items = [];
+  }
+}
+let stack = new Stack();
+stack.add(5);
+stack.add(6);
+stack.add(7);
+console.log(stack.items);
+stack.remove();
+console.log(stack.items);
+console.log(stack.peek());
+
+console.log(stack.isEmpty());
+console.log(stack.size());
+stack.clear();
+console.log(stack.items);
+
+//Queue
+class Queue {
+  constructor() {
+    this.items = {};
+    this.head = 0;
+    this.tail = 0;
+  }
+  enQueue(q) {
+    this.items[this.tail] = q;
+    this.tail++;
+  }
+  deQueue() {
+    let dq = this.items[this.head];
+    delete this.items[this.head];
+    this.head++;
+    return dq;
+  }
+  peek() {
+    let pk = this.items[this.head];
+    return pk;
+  }
+  size() {
+    return this.tail - this.head;
+  }
+  isEmpty() {
+    return this.items.length === 0;
+  }
+  clear() {
+    this.items = {};
+    this.head = 0;
+    this.tail = 0;
+  }
+}
+
+let queue = new Queue();
+queue.enQueue(1);
+queue.enQueue(2);
+queue.enQueue(3);
+queue.enQueue(4);
+queue.enQueue(5);
+console.log(queue.items);
+queue.deQueue();
+console.log(queue.items);
+console.log(queue.peek());
+queue.clear();
+console.log(queue.items);
+
+//Get dimensions
+// program to get the dimensions of an image
+
+const img = new Image();
+// "E:\Wallpapers\rose-pink-.jpg"
+// get the image
+img.src = "rose-pink-.jpg";
+
+// get height and width
+img.onload = function () {
+  console.log("width " + this.width);
+  console.log("height " + this.height);
+};
+const x = new Date();
+console.log(x.getTime());
+
+//shuffle deck of cards
+// program to shuffle the deck of cards
+
+// declare card elements
+const suits = ["Spades", "Diamonds", "Club", "Heart"];
+const values = [
+  "Ace",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "Jack",
+  "Queen",
+  "King",
+];
+
+// empty array to contain cards
+let deck = [];
+
+// create a deck of cards
+for (let i = 0; i < suits.length; i++) {
+  for (let x = 0; x < values.length; x++) {
+    let card = { Value: values[x], Suit: suits[i] };
+    deck.push(card);
+  }
+}
+// console.log(deck);
+// shuffle the cards
+for (let i = deck.length - 1; i > 0; i--) {
+  let j = Math.floor(Math.random() * i);
+  let temp = deck[i];
+  deck[i] = deck[j];
+  deck[j] = temp;
+}
+
+console.log("The first five cards are:");
+
+// display 5 results
+for (let i = 0; i < 5; i++) {
+  console.log(`${deck[i].Value} of ${deck[i].Suit}`);
+}
